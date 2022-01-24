@@ -2,8 +2,12 @@
 {
     internal class Player
     {
-        public List<CharacterCard> CardsInHand { get; set; } = new List<CharacterCard> { };
+        public int PlayerNumber = 0;
 
-        public List<SceneCard> SceneCardsInHand { get; set; } = new List<SceneCard> { };
+        public List<CharacterCard> DeckCharacterCards { get; set; } = new();
+
+        public List<SceneCard> DeckSceneCards { get; set; } = new();
+
+        public List<int> Scores => new();
     }
 }

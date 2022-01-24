@@ -5,13 +5,16 @@ namespace Rumini.Entities
     [DebuggerDisplay("Round = {Round}")]
     internal class Game
     {
-        public List<Player> players = new();
+        public List<CharacterCard> DeckCaracterCards { get; set; } = new();
+
+        public List<CharacterCard> DeckDiscardedCaracterCards { get; set; } = new();
+
+        public List<SceneCard> DeckDiscardedSceneCards { get; set; } = new();
+
+        public List<SceneCard> DeckSceneCards { get; set; } = new();
+
+        public List<Player> Players => new();
 
         public int Round { get; set; } = 0;
-
-        
-        public List<CharacterCard> OriginalDeckShuffled { get; set; } = new List<CharacterCard>();
-
-
     }
 }
