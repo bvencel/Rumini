@@ -10,19 +10,26 @@ while (true)
     counter++;
     Console.WriteLine($"Game #{counter}");
 
-    Game game = new Game();
+    Game game = new();
 
     _ = GameHelper.StartGame(NrPlayers, game);
-    ConsoleHelper.PrintGame(game);
+    //ConsoleHelper.PrintGame(game);
 
-    for (int i = 0; i < 8; i++)
+    for (int i = 1; i <= 8; i++)
     {
-        game.Round = i + 1;
+        game.Round = i;
 
         _ = GameHelper.PlayersMoveWithCharacterCards(game);
         GameHelper.CalculateScores(game);
         _ = GameHelper.PlayersThrowAwayPlayedCards(game);
-        ConsoleHelper.PrintGame(game);
+
+        // Last round
+        if (i == 8)
+        {
+            GameHelper.CalculateEndScores(game);
+        }
+
+        //ConsoleHelper.PrintGame(game);
     }
 
     Console.ReadLine();

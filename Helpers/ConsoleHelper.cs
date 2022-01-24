@@ -55,7 +55,7 @@ namespace Rumini.Helpers
             StringBuilder sb = new();
             for (int i = 0; i < indentLevel; i++)
             {
-                sb.Append("  ");
+                sb.Append("    ");
             }
 
             return sb.ToString();
@@ -75,13 +75,16 @@ namespace Rumini.Helpers
             indent++;
 
             // Game parameters
-            Out(indent, $"Game stuff");
+            Out(indent, $"Overall situation" +
+                $"");
             indent++;
 
             if (game.CurrectSceneCard != null)
             {
-                Out(indent, $"Current scene card {GetDeckStringS(game.CurrectSceneCard.Characters)}");
+                Out(indent, $"Current scene card {GetDeckStringS(game.CurrectSceneCard.Characters)}, value {game.CurrectSceneCard.PointValue}");
             }
+
+            Out(indent, $"Score [min: {game.Players.Min(p => p.Scores.Sum())}] [max: {game.Players.Max(p => p.Scores.Sum())}] [average: {game.Players.Average(p => p.Scores.Sum()):0.##}]");
 
             // Players
             foreach (var player in game.Players)
@@ -91,12 +94,8 @@ namespace Rumini.Helpers
                 Out(indent, $"Player #{player.PlayerNumber}");
                 indent++;
                 Out(indent, $"Deck {GetDeckString(player.DeckCharacterCards)}");
-                Out(indent, $"Scores {player.Scores.ToStringSerialized()}");
+                Out(indent, $"Score {player.Scores.Sum()} {player.Scores.ToStringSerialized()}");
             }
-
-            double avgScoreOfPlayers = game.Players.Average(p => p.Scores.Sum());
-
-            Out(indent, $"Average score: {avgScoreOfPlayers:0.##}");
 
             Console.WriteLine();
         }

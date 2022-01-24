@@ -1,5 +1,6 @@
 ﻿using Rumini.Constants;
 using Rumini.Entities;
+using Rumini.Enums;
 using Rumini.ExtensionMethods;
 
 namespace Rumini.Helpers
@@ -8,6 +9,21 @@ namespace Rumini.Helpers
     {
         private const int MaxNrPlayers = 6;
         private const int MinNrPlayers = 2;
+
+        /// <summary>
+        /// Player gets punished for the cards remaining in its hand.
+        /// </summary>
+        /// <param name="game"></param>
+        public static void CalculateEndScores(Game game)
+        {
+            foreach (Player player in game.Players)
+            {
+                int multiplier = -3;
+                int valuesOfCardsInPlayerHand = player.DeckCharacterCards.Sum(c => c.PointValue);
+
+                player.Scores.Add(valuesOfCardsInPlayerHand * multiplier);
+            }
+        }
 
         public static void CalculateScores(Game game)
         {
@@ -18,7 +34,15 @@ namespace Rumini.Helpers
 
                 int cardValuesOfPlayer = player.PlayedCharacterCards.Sum(c => c.PointValue);
 
-                player.Scores.Add((sceneCardPoints + cardValuesOfPlayer) * multiplier);
+                if (cardValuesOfPlayer == 0)
+                {
+                    // Player passed
+                    player.Scores.Add(0);
+                }
+                else
+                {
+                    player.Scores.Add((sceneCardPoints + cardValuesOfPlayer) * multiplier);
+                }
             }
         }
 
@@ -38,7 +62,7 @@ namespace Rumini.Helpers
                     if (
                         game.CurrectSceneCard is not null &&
                         SceneCardHelper.SceneCardContainsCharacter(game.CurrectSceneCard, card.CharacterOfCard) &&
-                        !player.PlayedCharacterCards.Contains(card))
+                        !PlayerAlreadyPlayedCharacter(player.PlayedCharacterCards, card.CharacterOfCard))
                     {
                         CharacterCardHelper.MoveCardWithId(card.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
                         cardPlayed = true;
@@ -88,19 +112,34 @@ namespace Rumini.Helpers
                         case 3:
                         case 4:
                             // Pick up 1 card
-                            CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, 2);
+                            CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, 1);
                             break;
 
                         case 7:
+                            // A card could be thrown away, but not implemented yet
+                            break;
+
                         case 8:
-                            // Get rid of 1 card
-                            if (player.DeckCharacterCards.Count >= 1)
+                            // If player still has cards
+                            if (player.DeckCharacterCards.Count > 0)
                             {
-                                CharacterCardHelper.MoveCards(player.DeckCharacterCards, game.DeckDiscardedCaracterCards, 1);
-                            }
-                            else
-                            {
-                                //Console.WriteLine($"Player {player.PlayerNumber} did not have any cards to throw away");
+                                // No card was played, throw away the biggest one
+                                bool hasSquidCard = player.HasSquidCard(out CharacterCard? squidCard);
+
+                                if (hasSquidCard && squidCard is not null && game.CurrectSceneCard is not null)
+                                {
+                                    CharacterCardHelper.MoveCardWithId(squidCard.Id, player.DeckCharacterCards, game.DeckDiscardedCaracterCards);
+                                }
+                                else
+                                {
+                                    // Not squid card
+                                    CharacterCard? maxValuedCard = player.DeckCharacterCards.OrderByDescending(c => c.PointValue).FirstOrDefault();
+
+                                    if (maxValuedCard != null)
+                                    {
+                                        CharacterCardHelper.MoveCardWithId(maxValuedCard.Id, player.DeckCharacterCards, game.DeckDiscardedCaracterCards);
+                                    }
+                                }
                             }
 
                             break;
@@ -302,6 +341,11 @@ namespace Rumini.Helpers
                 game.Players[^1].DeckSceneCards);
 
             return true;
+        }
+
+        private static bool PlayerAlreadyPlayedCharacter(List<CharacterCard> playedCharacterCards, Character character)
+        {
+            return playedCharacterCards.Any(c => c.CharacterOfCard == character);
         }
 
         private static bool PlayersSwitchCharacterCards(Game game)
