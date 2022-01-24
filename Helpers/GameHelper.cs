@@ -92,38 +92,223 @@ namespace Rumini.Helpers
 
         public static List<SceneCard> SceneCards => new()
         {
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen, Character.Negro } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen, Character.Negro } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Kapitany, Character.Sebestyen, Character.Negro, Character.Bandi } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Rozi } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Sebestyen, Character.Johanna } },
-            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Negro, Character.Bandi } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Negro } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Sebestyen } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Feco, Character.Johanna } },
-            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Feco } },
-            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Feco } },
-            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Sebestyen } },
-            new SceneCard() { Characters = new List<Character> { Character.Feco, Character.Johanna } },
-            new SceneCard() { Characters = new List<Character> { Character.Feco, Character.Kapitany } },
-            new SceneCard() { Characters = new List<Character> { Character.Kapitany, Character.Sebestyen } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Kapitany } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Negro } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Rozi } },
-            new SceneCard() { Characters = new List<Character> { Character.Baliko } },
-            new SceneCard() { Characters = new List<Character> { Character.Bandi } },
-            new SceneCard() { Characters = new List<Character> { Character.Feco } },
-            new SceneCard() { Characters = new List<Character> { Character.Feco } },
-            new SceneCard() { Characters = new List<Character> { Character.Negro } },
-            new SceneCard() { Characters = new List<Character> { Character.Rumini } },
-            new SceneCard() { Characters = new List<Character> { Character.Sebestyen } },
+            new SceneCard
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard= Character.Rumini},
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen },
+                    new SceneCardCharacter { CharacterOfCard = Character.Negro } },
+            },
+
+            new SceneCard
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard= Character.Rumini},
+                    new SceneCardCharacter { CharacterOfCard= Character.Baliko},
+                    new SceneCardCharacter { CharacterOfCard= Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard= Character.Kapitany },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen },
+                    new SceneCardCharacter { CharacterOfCard= Character.Negro } }
+            },
+
+            new SceneCard
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen },
+                    new SceneCardCharacter { CharacterOfCard = Character.Negro },
+                    new SceneCardCharacter { CharacterOfCard = Character.Bandi } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany },
+                    new SceneCardCharacter { CharacterOfCard = Character.Rozi } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen },
+                    new SceneCardCharacter { CharacterOfCard = Character.Johanna } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Negro },
+                    new SceneCardCharacter { CharacterOfCard = Character.Bandi } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Negro } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Johanna } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Johanna } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco },
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany },
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Kapitany } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Negro } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini },
+                    new SceneCardCharacter { CharacterOfCard = Character.Rozi } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Baliko } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Bandi } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Feco } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Negro } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Rumini } },
+            },
+            new SceneCard()
+            {
+                Characters = new List<SceneCardCharacter> {
+                    new SceneCardCharacter { CharacterOfCard = Character.Sebestyen } },
+            }
         };
 
         public static bool PlayGame(int nrPlayers, out Game game)
@@ -269,15 +454,18 @@ namespace Rumini.Helpers
             {
                 // ToDo: replace with AI
 
+                // Play matching cards
+                bool cardPlayed = false;
                 List<CharacterCard> userCharacterCardsCopy = player.DeckCharacterCards.Clone().ToList();
 
                 foreach (CharacterCard card in userCharacterCardsCopy)
                 {
                     if (
-                        game.CurrectSceneCard.Characters.Contains(card.CharacterOfCard) &&
+                        SceneCardHelper.SceneCardContainsCharacter(game.CurrectSceneCard, card.CharacterOfCard) &&
                         !player.PlayedCharacterCards.Contains(card))
                     {
                         CharacterCardHelper.MoveCardWithId(card.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
+                        cardPlayed = true;
                     }
                 }
 
@@ -289,9 +477,25 @@ namespace Rumini.Helpers
                     if (hasSquidCard)
                     {
                         // Player has a squid card
-
                         // Find the largest card number it can be replaced with
+                        // Largest number card is at the end of the collection
+                        for (int i = game.CurrectSceneCard.Characters.Count - 1; i <= 0; i--)
+                        {
+                            if (player.PlayedCharacterCards.Any(p => p.CharacterOfCard == game.CurrectSceneCard.Characters[i].CharacterOfCard))
+                            {
+                                // Card already played
+                                continue;
+                            }
+
+                            // Play squid as the found card
+                            cardPlayed = true;
+                        }
                     }
+                }
+
+                // Pass
+                if (!cardPlayed)
+                {
                 }
             }
 

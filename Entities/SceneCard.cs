@@ -1,10 +1,8 @@
-﻿using Rumini.Enums;
-
-namespace Rumini.Entities
+﻿namespace Rumini.Entities
 {
     internal class SceneCard : ICloneable
     {
-        public List<Character> Characters { get; set; } = new();
+        public List<SceneCardCharacter> Characters { get; set; } = new();
 
         public int PointValue
         {
@@ -18,7 +16,7 @@ namespace Rumini.Entities
                 PointValue = PointValue,
             };
 
-            foreach (Character item in Characters)
+            foreach (SceneCardCharacter item in Characters)
             {
                 clone.Characters.Add(item);
             }

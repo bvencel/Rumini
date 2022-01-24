@@ -1,9 +1,15 @@
 ﻿using Rumini.Entities;
+using Rumini.Enums;
 
 namespace Rumini.Helpers
 {
     internal static class SceneCardHelper
     {
+        public static bool MoveAllCards(List<SceneCard> sourceDeck, List<SceneCard> targetDeck)
+        {
+            return MoveCards(sourceDeck, targetDeck, sourceDeck.Count);
+        }
+
         public static bool MoveCards(List<SceneCard> sourceDeck, List<SceneCard> targetDeck, int nrCardsToMove)
         {
             if (nrCardsToMove == 0)
@@ -36,9 +42,9 @@ namespace Rumini.Helpers
             return true;
         }
 
-        public static bool MoveAllCards(List<SceneCard> sourceDeck, List<SceneCard> targetDeck)
+        public static bool SceneCardContainsCharacter(SceneCard sceneCardToCheck, Character character)
         {
-            return MoveCards(sourceDeck, targetDeck, sourceDeck.Count);
+            return sceneCardToCheck.Characters.Any(c => c.CharacterOfCard == character);
         }
     }
 }
