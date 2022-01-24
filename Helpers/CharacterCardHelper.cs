@@ -29,6 +29,11 @@ namespace Rumini.Helpers
 
         public static bool MoveCards(List<CharacterCard> sourceDeck, List<CharacterCard> targetDeck, int nrCardsToMove)
         {
+            if (nrCardsToMove == 0)
+            {
+                return true;
+            }
+
             if (sourceDeck == null)
             {
                 Console.WriteLine($"Source deck was null while moving {nrCardsToMove} character cards");

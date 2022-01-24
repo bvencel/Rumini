@@ -129,7 +129,31 @@ namespace Rumini.Helpers
                             break;
 
                         case 7:
-                            // A card could be thrown away, but not implemented yet
+                            if (player.Strategy.AlsoThrowAwayCardInTurnBeforeLast)
+                            {
+                                // If player still has cards
+                                if (player.DeckCharacterCards.Count > 0)
+                                {
+                                    // No card was played, throw away the biggest one
+                                    bool hasSquidCard = player.HasSquidCard(out CharacterCard? squidCard);
+
+                                    if (hasSquidCard && squidCard is not null && game.CurrectSceneCard is not null)
+                                    {
+                                        CharacterCardHelper.MoveCardWithId(squidCard.Id, player.DeckCharacterCards, game.DeckDiscardedCaracterCards);
+                                    }
+                                    else
+                                    {
+                                        // Not squid card
+                                        CharacterCard? maxValuedCard = player.DeckCharacterCards.OrderByDescending(c => c.PointValue).FirstOrDefault();
+
+                                        if (maxValuedCard != null)
+                                        {
+                                            CharacterCardHelper.MoveCardWithId(maxValuedCard.Id, player.DeckCharacterCards, game.DeckDiscardedCaracterCards);
+                                        }
+                                    }
+                                }
+                            }
+
                             break;
 
                         case 8:
@@ -278,7 +302,23 @@ namespace Rumini.Helpers
         {
             foreach (Player player in game.Players)
             {
-                // ToDo: replace shuffle with AI
+                if (player.Strategy.ThrowAwayCheapSceneCards)
+                {
+                    player.DeckSceneCards = player.DeckSceneCards.OrderBy(s => s.PointValue).ToList();
+                    SceneCardHelper.MoveCards(player.DeckSceneCards, game.DeckDiscardedSceneCards, 1);
+
+                    continue;
+                }
+
+                if (player.Strategy.ThrowAwayExpensiveSceneCards)
+                {
+                    player.DeckSceneCards = player.DeckSceneCards.OrderByDescending(s => s.PointValue).ToList();
+                    SceneCardHelper.MoveCards(player.DeckSceneCards, game.DeckDiscardedSceneCards, 1);
+
+                    continue;
+                }
+
+                // If nothing else was done, shuffle and get rid of a random one
                 player.DeckSceneCards.Shuffle();
                 SceneCardHelper.MoveCards(player.DeckSceneCards, game.DeckDiscardedSceneCards, 1);
             }
@@ -371,6 +411,80 @@ namespace Rumini.Helpers
 
             foreach (Player player in game.Players)
             {
+                if (player.Strategy.DoNotThrowAwayCards)
+                {
+                    continue;
+                }
+
+                if (player.Strategy.ThrowAwayCheapCards)
+                {
+                    // Throw away the cheapest cards
+                    player.DeckCharacterCards = player.DeckCharacterCards.OrderBy(c => c.PointValue).ToList();
+
+                    // Move the max allowed cards
+                    CharacterCardHelper.MoveCards(player.DeckCharacterCards, game.DeckDiscardedCaracterCards, NrMaxCharacterCardsToReplace);
+
+                    // Replenish what was discarded
+                    CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, NrMaxCharacterCardsToReplace);
+
+                    continue;
+                }
+
+                if (player.Strategy.ThrowAwayExpensiveCards)
+                {
+                    // Throw away the cheapest cards
+                    player.DeckCharacterCards = player.DeckCharacterCards.OrderByDescending(c => c.PointValue).ToList();
+
+                    // Move the max allowed cards
+                    CharacterCardHelper.MoveCards(player.DeckCharacterCards, game.DeckDiscardedCaracterCards, NrMaxCharacterCardsToReplace);
+
+                    // Replenish what was discarded
+                    CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, NrMaxCharacterCardsToReplace);
+
+                    continue;
+                }
+
+                if (player.Strategy.ThrowAwayDuplicates)
+                {
+                    // Throw away duplicates only
+                    int nrCardsThrownAway = 0;
+
+                    while (nrCardsThrownAway < NrMaxCharacterCardsToReplace)
+                    {
+                        // Find most duplicates
+                        var query = player.DeckCharacterCards.GroupBy(x => x.CharacterOfCard)
+                            .Where(g => g.Count() > 1)
+                            .Select(y => new { Element = y.Key, Counter = y.Count() })
+                            .OrderByDescending(x => x.Counter)
+                            .ToList();
+
+                        if (query.Count > 0)
+                        {
+                            Character characterWithMostDuplicates = query.First().Element;
+
+                            List<CharacterCard> cardsToThrowAway = player.DeckCharacterCards.Where(c => c.CharacterOfCard == characterWithMostDuplicates).Take(Math.Min(
+                                player.DeckCharacterCards.Count(c => c.CharacterOfCard == characterWithMostDuplicates),
+                                NrMaxCharacterCardsToReplace - nrCardsThrownAway)).ToList();
+
+                            foreach (CharacterCard card in cardsToThrowAway)
+                            {
+                                CharacterCardHelper.MoveCardWithId(card.Id, player.DeckCharacterCards, game.DeckDiscardedCaracterCards);
+                                nrCardsThrownAway++;
+                            }
+                        }
+                        else
+                        {
+                            // If there are no duplicates, do nothing
+                            break;
+                        }
+                    }
+
+                    CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, nrCardsThrownAway);
+
+                    continue;
+                }
+
+                // In case no strategy is defined, throw away a random number of cards
                 // Discard up-to 3 cards
                 int nrCardsSwitched = new Random().Next(0, NrMaxCharacterCardsToReplace + 1);
 
