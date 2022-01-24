@@ -13,6 +13,8 @@ namespace Rumini.Entities
 
         public List<SceneCard> DeckSceneCards { get; set; } = new();
 
+        public List<SceneCard> DeckSceneCardsOriginal { get; set; } = new();
+
         public List<Player> Players => new();
 
         public int Round { get; set; } = 0;

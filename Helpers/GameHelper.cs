@@ -126,15 +126,17 @@ namespace Rumini.Helpers
             new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Sebestyen } },
         };
 
-        public static bool PlayGame(int nrPlayers)
+        public static bool PlayGame(int nrPlayers, out Game? game)
         {
+            game = null;
+
             if (nrPlayers < MinNrPlayers || nrPlayers > MaxNrPlayers)
             {
                 Console.WriteLine($"{nrPlayers} is not a valid player count. The game supports {MinNrPlayers} to {MaxNrPlayers} players.");
                 return false;
             }
 
-            Game? game = StartGame(nrPlayers);
+            game = StartGame(nrPlayers);
 
             if (game == null)
             {
@@ -157,6 +159,18 @@ namespace Rumini.Helpers
             }
         }
 
+        private static bool CompleteSceneCardsToEight(Game game)
+        {
+            const int NrInitialSceneCardsNeeded = 8;
+
+            SceneCardHelper.MoveCards(
+                game.DeckSceneCardsOriginal,
+                game.DeckSceneCards,
+                NrInitialSceneCardsNeeded - game.DeckSceneCards.Count);
+
+            return true;
+        }
+
         private static bool DiscardOneSceneCard(Game game)
         {
             foreach (Player player in game.Players)
@@ -171,9 +185,6 @@ namespace Rumini.Helpers
 
         private static bool GatherRemainingSceneCards(Game game)
         {
-            // Throw away the remaining cards
-            SceneCardHelper.MoveCards(game.DeckSceneCards, game.DeckDiscardedSceneCards, game.DeckSceneCards.Count);
-
             foreach (Player player in game.Players)
             {
                 SceneCardHelper.MoveCards(player.DeckSceneCards, game.DeckSceneCards, 1);
@@ -203,7 +214,7 @@ namespace Rumini.Helpers
 
             foreach (Player player in game.Players)
             {
-                SceneCardHelper.MoveCards(game.DeckSceneCards, player.DeckSceneCards, nrSceneCardsToDeal);
+                SceneCardHelper.MoveCards(game.DeckSceneCardsOriginal, player.DeckSceneCards, nrSceneCardsToDeal);
             }
 
             return true;
@@ -260,7 +271,7 @@ namespace Rumini.Helpers
             Game game = new()
             {
                 DeckCaracterCards = CharacterCards.CloneAndShuffle().ToList(),
-                DeckSceneCards = SceneCards.CloneAndShuffle().ToList(),
+                DeckSceneCardsOriginal = SceneCards.CloneAndShuffle().ToList(),
                 Round = 0,
             };
 
@@ -297,6 +308,11 @@ namespace Rumini.Helpers
             }
 
             if (!GatherRemainingSceneCards(game))
+            {
+                return null;
+            }
+
+            if (!CompleteSceneCardsToEight(game))
             {
                 return null;
             }
