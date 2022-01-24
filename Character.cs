@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rumini
+﻿namespace Rumini
 {
-    internal class Character
+    internal enum Character
     {
+        Rumini,
+        Baliko,
+        Feco,
+        Kapitany,
+        Sebestyen,
+        Negro,
+        Bandi,
+        Johanna,
+        Rozi,
+        Oriaspolip,
     }
 }
