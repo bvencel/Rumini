@@ -357,8 +357,7 @@ namespace Rumini.Helpers
                 // Discard up-to 3 cards
                 int nrCardsSwitched = new Random().Next(0, NrMaxCharacterCardsToReplace + 1);
 
-                // ToDo: replace shuffle with AI
-                player.DeckCharacterCards.Shuffle();
+                // ToDo: replace decision with AI
                 CharacterCardHelper.MoveCards(player.DeckCharacterCards, game.DeckDiscardedCaracterCards, nrCardsSwitched);
 
                 // Replenish what was discarded
