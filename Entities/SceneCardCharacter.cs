@@ -5,15 +5,13 @@ using System.Diagnostics;
 
 namespace Rumini.Entities
 {
+    /// <summary>
+    /// Represents one of the characters enumerated on a score card.
+    /// </summary>
     [DebuggerDisplay("Character = {CharacterOfCard}")]
-    internal class CharacterCard : ICloneable
+    internal class SceneCardCharacter
     {
         public Character CharacterOfCard { get; set; }
-
-        /// <summary>
-        /// Unique number so cards can be easily identified
-        /// </summary>
-        public int Id { get; set; }
 
         public int PointValue
         {
@@ -21,15 +19,6 @@ namespace Rumini.Entities
             {
                 return CharacterCardHelper.GetCharacterPointValue(CharacterOfCard);
             }
-        }
-
-        public object Clone()
-        {
-            return new CharacterCard()
-            {
-                CharacterOfCard = CharacterOfCard,
-                Id = Id,
-            };
         }
     }
 }

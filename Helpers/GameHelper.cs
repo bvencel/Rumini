@@ -11,119 +11,119 @@ namespace Rumini.Helpers
 
         public static List<CharacterCard> CharacterCards => new()
         {
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 0, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 1, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 2, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 3, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 4, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 5, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 6, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 7, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 8, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 9, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 10, CharacterOfCard = Character.Rumini },
+            new CharacterCard() { Id = 11, CharacterOfCard = Character.Rumini },
 
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
-            new CharacterCard() { PointValue = 1, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 12, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 13, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 14, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 15, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 16, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 17, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 18, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 19, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 20, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 21, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 22, CharacterOfCard = Character.Baliko },
+            new CharacterCard() { Id = 23, CharacterOfCard = Character.Baliko },
 
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
-            new CharacterCard() { PointValue = 2, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 24, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 25, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 26, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 27, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 28, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 29, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 30, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 31, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 32, CharacterOfCard = Character.Feco },
+            new CharacterCard() { Id = 33, CharacterOfCard = Character.Feco },
 
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 34, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 35, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 36, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 37, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 38, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 39, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 40, CharacterOfCard = Character.Kapitany },
+            new CharacterCard() { Id = 41, CharacterOfCard = Character.Kapitany },
 
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
-            new CharacterCard() { PointValue = 3, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 42, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 43, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 44, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 45, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 46, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 47, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 48, CharacterOfCard = Character.Sebestyen },
+            new CharacterCard() { Id = 49, CharacterOfCard = Character.Sebestyen },
 
-            new CharacterCard() { PointValue = 4, CharacterOfCard = Character.Negro },
-            new CharacterCard() { PointValue = 4, CharacterOfCard = Character.Negro },
-            new CharacterCard() { PointValue = 4, CharacterOfCard = Character.Negro },
-            new CharacterCard() { PointValue = 4, CharacterOfCard = Character.Negro },
-            new CharacterCard() { PointValue = 4, CharacterOfCard = Character.Negro },
-            new CharacterCard() { PointValue = 4, CharacterOfCard = Character.Negro },
+            new CharacterCard() { Id = 50, CharacterOfCard = Character.Negro },
+            new CharacterCard() { Id = 51, CharacterOfCard = Character.Negro },
+            new CharacterCard() { Id = 52, CharacterOfCard = Character.Negro },
+            new CharacterCard() { Id = 53, CharacterOfCard = Character.Negro },
+            new CharacterCard() { Id = 54, CharacterOfCard = Character.Negro },
+            new CharacterCard() { Id = 55, CharacterOfCard = Character.Negro },
 
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Bandi },
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Bandi },
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Bandi },
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Bandi },
+            new CharacterCard() { Id = 56, CharacterOfCard = Character.Bandi },
+            new CharacterCard() { Id = 57, CharacterOfCard = Character.Bandi },
+            new CharacterCard() { Id = 58, CharacterOfCard = Character.Bandi },
+            new CharacterCard() { Id = 59, CharacterOfCard = Character.Bandi },
 
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Johanna },
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Johanna },
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Johanna },
-            new CharacterCard() { PointValue = 5, CharacterOfCard = Character.Johanna },
+            new CharacterCard() { Id = 60, CharacterOfCard = Character.Johanna },
+            new CharacterCard() { Id = 61, CharacterOfCard = Character.Johanna },
+            new CharacterCard() { Id = 62, CharacterOfCard = Character.Johanna },
+            new CharacterCard() { Id = 63, CharacterOfCard = Character.Johanna },
 
-            new CharacterCard() { PointValue = 6, CharacterOfCard = Character.Rozi },
-            new CharacterCard() { PointValue = 6, CharacterOfCard = Character.Rozi },
+            new CharacterCard() { Id = 64, CharacterOfCard = Character.Rozi },
+            new CharacterCard() { Id = 65, CharacterOfCard = Character.Rozi },
 
-            new CharacterCard() { PointValue = 10000, CharacterOfCard = Character.Oriaspolip },
-            new CharacterCard() { PointValue = 10000, CharacterOfCard = Character.Oriaspolip },
+            new CharacterCard() { Id = 66, CharacterOfCard = Character.Oriaspolip },
+            new CharacterCard() { Id = 67, CharacterOfCard = Character.Oriaspolip },
         };
 
         public static List<SceneCard> SceneCards => new()
         {
-            new SceneCard() { PointValue = 2, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen, Character.Negro } },
-            new SceneCard() { PointValue = 2, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen, Character.Negro } },
-            new SceneCard() { PointValue = 2, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Kapitany, Character.Sebestyen, Character.Negro, Character.Bandi } },
-            new SceneCard() { PointValue = 3, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Rozi } },
-            new SceneCard() { PointValue = 3, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Sebestyen, Character.Johanna } },
-            new SceneCard() { PointValue = 4, Characters = new List<Character> { Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen } },
-            new SceneCard() { PointValue = 4, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany } },
-            new SceneCard() { PointValue = 4, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Negro, Character.Bandi } },
-            new SceneCard() { PointValue = 5, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
-            new SceneCard() { PointValue = 5, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
-            new SceneCard() { PointValue = 5, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
-            new SceneCard() { PointValue = 5, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Negro } },
-            new SceneCard() { PointValue = 5, Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Sebestyen } },
-            new SceneCard() { PointValue = 5, Characters = new List<Character> { Character.Rumini, Character.Feco, Character.Johanna } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Baliko, Character.Feco } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Baliko, Character.Feco } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Baliko, Character.Sebestyen } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Feco, Character.Johanna } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Feco, Character.Kapitany } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Kapitany, Character.Sebestyen } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Rumini, Character.Baliko } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Rumini, Character.Baliko } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Rumini, Character.Kapitany } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Rumini, Character.Negro } },
-            new SceneCard() { PointValue = 6, Characters = new List<Character> { Character.Rumini, Character.Rozi } },
-            new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Baliko } },
-            new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Bandi } },
-            new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Feco } },
-            new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Feco } },
-            new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Negro } },
-            new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Rumini } },
-            new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Sebestyen } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen, Character.Negro } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen, Character.Negro } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Kapitany, Character.Sebestyen, Character.Negro, Character.Bandi } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany, Character.Rozi } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Sebestyen, Character.Johanna } },
+            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Feco, Character.Kapitany, Character.Sebestyen } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco, Character.Kapitany } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Negro, Character.Bandi } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Feco } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Negro } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko, Character.Sebestyen } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Feco, Character.Johanna } },
+            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Feco } },
+            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Feco } },
+            new SceneCard() { Characters = new List<Character> { Character.Baliko, Character.Sebestyen } },
+            new SceneCard() { Characters = new List<Character> { Character.Feco, Character.Johanna } },
+            new SceneCard() { Characters = new List<Character> { Character.Feco, Character.Kapitany } },
+            new SceneCard() { Characters = new List<Character> { Character.Kapitany, Character.Sebestyen } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Baliko } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Kapitany } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Negro } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini, Character.Rozi } },
+            new SceneCard() { Characters = new List<Character> { Character.Baliko } },
+            new SceneCard() { Characters = new List<Character> { Character.Bandi } },
+            new SceneCard() { Characters = new List<Character> { Character.Feco } },
+            new SceneCard() { Characters = new List<Character> { Character.Feco } },
+            new SceneCard() { Characters = new List<Character> { Character.Negro } },
+            new SceneCard() { Characters = new List<Character> { Character.Rumini } },
+            new SceneCard() { Characters = new List<Character> { Character.Sebestyen } },
         };
 
         public static bool PlayGame(int nrPlayers, out Game game)
@@ -137,6 +137,8 @@ namespace Rumini.Helpers
             }
 
             bool success = StartGame(nrPlayers, game);
+
+            success &= MidGame(game);
 
             return success;
         }
@@ -214,6 +216,26 @@ namespace Rumini.Helpers
             return true;
         }
 
+        private static bool MidGame(Game game)
+        {
+            int round = 0;
+            bool success = true;
+
+            foreach (SceneCard sceneCard in game.DeckSceneCards)
+            {
+                round++;
+
+                game.Round = round;
+
+                success &= PlayersMoveWithCharacterCards(game);
+                //  HandleGiantSquid()
+                //  HandlePass()
+                // CalculateScores()
+            }
+
+            return true;
+        }
+
         private static bool MoveSceneCardsToNextPlayer(Game game)
         {
             List<SceneCard> tempSceneCards = new();
@@ -238,6 +260,45 @@ namespace Rumini.Helpers
                 game.Players[^1].DeckSceneCards);
 
             return true;
+        }
+
+        private static bool PlayersMoveWithCharacterCards(Game game)
+        {
+            // Put down match
+            foreach (Player player in game.Players)
+            {
+                // ToDo: replace with AI
+
+                List<CharacterCard> userCharacterCardsCopy = player.DeckCharacterCards.Clone().ToList();
+
+                foreach (CharacterCard card in userCharacterCardsCopy)
+                {
+                    if (
+                        game.CurrectSceneCard.Characters.Contains(card.CharacterOfCard) &&
+                        !player.PlayedCharacterCards.Contains(card))
+                    {
+                        CharacterCardHelper.MoveCardWithId(card.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
+                    }
+                }
+
+                // Use the squid when the reqards are worth it
+                if (game.Round > 4)
+                {
+                    bool hasSquidCard = player.HasSquidCard(out CharacterCard? squidCard);
+
+                    if (hasSquidCard)
+                    {
+                        // Player has a squid card
+
+                        // Find the largest card number it can be replaced with
+                    }
+                }
+            }
+
+            return true;
+
+            //  HandleGiantSquid()
+            //  HandlePass()
         }
 
         private static bool PlayersSwitchCharacterCards(Game game)

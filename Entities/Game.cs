@@ -5,6 +5,14 @@ namespace Rumini.Entities
     [DebuggerDisplay("Round = {Round}")]
     internal class Game
     {
+        public SceneCard CurrectSceneCard
+        {
+            get
+            {
+                return DeckSceneCards[Round - 1];
+            }
+        }
+
         public List<CharacterCard> DeckCaracterCards { get; set; } = new();
 
         public List<CharacterCard> DeckDiscardedCaracterCards { get; set; } = new();
