@@ -23,6 +23,13 @@ namespace Rumini.Entities
             }
         }
 
+        public bool IsSquid => CharacterOfCard == Character.Oriaspolip;
+
+        /// <summary>
+        /// If the card 
+        /// </summary>
+        public Character PlayedAsCharacter { get; set; }
+
         public object Clone()
         {
             return new CharacterCard()

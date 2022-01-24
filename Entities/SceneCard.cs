@@ -9,6 +9,11 @@
             get; set;
         }
 
+        /// <summary>
+        ///  Used to differentiate between cards.
+        /// </summary>
+        public string Text { get; set; } = string.Empty;
+
         public object Clone()
         {
             SceneCard clone = new()
