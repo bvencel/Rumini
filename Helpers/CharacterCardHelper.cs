@@ -22,6 +22,11 @@ namespace Rumini.Helpers
             };
         }
 
+        public static bool MoveAllCards(List<CharacterCard> sourceDeck, List<CharacterCard> targetDeck)
+        {
+            return MoveCards(sourceDeck, targetDeck, sourceDeck.Count);
+        }
+
         public static bool MoveCards(List<CharacterCard> sourceDeck, List<CharacterCard> targetDeck, int nrCardsToMove)
         {
             if (sourceDeck == null)

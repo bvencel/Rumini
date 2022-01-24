@@ -5,11 +5,16 @@ namespace Rumini.Entities
     [DebuggerDisplay("Round = {Round}")]
     internal class Game
     {
-        public SceneCard CurrectSceneCard
+        public SceneCard? CurrectSceneCard
         {
             get
             {
-                return DeckSceneCards[Round - 1];
+                if (Round >= 1)
+                {
+                    return DeckSceneCards[Round - 1];
+                }
+
+                return null;
             }
         }
 

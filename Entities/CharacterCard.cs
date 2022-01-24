@@ -19,16 +19,34 @@ namespace Rumini.Entities
         {
             get
             {
-                return CharacterCardHelper.GetCharacterPointValue(CharacterOfCard);
+                return CharacterCardHelper.GetCharacterPointValue(PlayedAsCharacter);
             }
         }
 
         public bool IsSquid => CharacterOfCard == Character.Oriaspolip;
 
+        Character playedAsCharacter;
+
         /// <summary>
         /// If the card 
         /// </summary>
-        public Character PlayedAsCharacter { get; set; }
+        public Character PlayedAsCharacter
+        {
+            get
+            {
+
+                if (IsSquid)
+                {
+                    return playedAsCharacter;
+                }
+
+                return CharacterOfCard;
+            }
+            set
+            {
+                playedAsCharacter = value;
+            }
+        }
 
         public object Clone()
         {

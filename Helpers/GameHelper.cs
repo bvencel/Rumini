@@ -9,21 +9,189 @@ namespace Rumini.Helpers
         private const int MaxNrPlayers = 6;
         private const int MinNrPlayers = 2;
 
-        public static bool PlayGame(int nrPlayers, out Game game)
+        public static void CalculateScores(Game game)
+        {
+            foreach (Player player in game.Players)
+            {
+                int multiplier = GetMultiplierBasedOnRound(game.Round);
+                int sceneCardPoints = game.CurrectSceneCard?.PointValue ?? 0;
+
+                int cardValuesOfPlayer = player.PlayedCharacterCards.Sum(c => c.PointValue);
+
+                player.Scores.Add((sceneCardPoints + cardValuesOfPlayer) * multiplier);
+            }
+        }
+
+        public static bool PlayersMoveWithCharacterCards(Game game)
+        {
+            // Put down match
+            foreach (Player player in game.Players)
+            {
+                // ToDo: replace with AI
+
+                // Play matching cards
+                bool cardPlayed = false;
+                List<CharacterCard> userCharacterCardsCopy = player.DeckCharacterCards.Clone().ToList();
+
+                foreach (CharacterCard card in userCharacterCardsCopy)
+                {
+                    if (
+                        game.CurrectSceneCard is not null &&
+                        SceneCardHelper.SceneCardContainsCharacter(game.CurrectSceneCard, card.CharacterOfCard) &&
+                        !player.PlayedCharacterCards.Contains(card))
+                    {
+                        CharacterCardHelper.MoveCardWithId(card.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
+                        cardPlayed = true;
+                    }
+                }
+
+                // Use the squid when the reqards are worth it
+                if (game.Round > 4)
+                {
+                    bool hasSquidCard = player.HasSquidCard(out CharacterCard? squidCard);
+
+                    if (hasSquidCard && squidCard is not null && game.CurrectSceneCard is not null)
+                    {
+                        // Player has a squid card
+                        // Find the largest card number it can be replaced with
+                        // Largest number card is at the end of the collection
+                        for (int i = game.CurrectSceneCard.Characters.Count - 1; i >= 0; i--)
+                        {
+                            if (player.PlayedCharacterCards.Any(p => p.CharacterOfCard == game.CurrectSceneCard.Characters[i].CharacterOfCard))
+                            {
+                                // Card already played
+                                continue;
+                            }
+
+                            squidCard.PlayedAsCharacter = game.CurrectSceneCard.Characters[i].CharacterOfCard;
+
+                            // Play squid as the found card
+                            CharacterCardHelper.MoveCardWithId(squidCard.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
+                            cardPlayed = true;
+
+                            continue;
+                        }
+                    }
+                }
+
+                // Pass
+                if (!cardPlayed)
+                {
+                    switch (game.Round)
+                    {
+                        case 1:
+                        case 2:
+                            // Pick up two cards
+                            CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, 2);
+                            break;
+
+                        case 3:
+                        case 4:
+                            // Pick up 1 card
+                            CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, 2);
+                            break;
+
+                        case 7:
+                        case 8:
+                            // Get rid of 1 card
+                            if (player.DeckCharacterCards.Count >= 1)
+                            {
+                                CharacterCardHelper.MoveCards(player.DeckCharacterCards, game.DeckDiscardedCaracterCards, 1);
+                            }
+                            else
+                            {
+                                //Console.WriteLine($"Player {player.PlayerNumber} did not have any cards to throw away");
+                            }
+
+                            break;
+
+                        default:
+                        case 5:
+                        case 6:
+                            // Do nothing
+                            break;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public static bool PlayersThrowAwayPlayedCards(Game game)
+        {
+            foreach (Player player in game.Players)
+            {
+                CharacterCardHelper.MoveAllCards(player.PlayedCharacterCards, game.DeckDiscardedCaracterCards);
+            }
+
+            return true;
+        }
+
+        public static void PlayGame(int nrPlayers, out Game game)
         {
             game = new Game();
 
-            if (nrPlayers < MinNrPlayers || nrPlayers > MaxNrPlayers)
+            _ = StartGame(nrPlayers, game);
+
+            for (int i = 0; i < 8; i++)
             {
-                Console.WriteLine($"{nrPlayers} is not a valid player count. The game supports {MinNrPlayers} to {MaxNrPlayers} players.");
+                game.Round = i + 1;
+
+                _ = PlayersMoveWithCharacterCards(game);
+                CalculateScores(game);
+                _ = PlayersThrowAwayPlayedCards(game);
+            }
+        }
+
+        public static bool StartGame(int nrPlayers, Game game)
+        {
+            game.DeckCaracterCards = DeckDefinitions.CharacterCards.CloneAndShuffle().ToList();
+            game.DeckSceneCardsOriginal = DeckDefinitions.SceneCards.CloneAndShuffle().ToList();
+            game.Round = 0;
+
+            AddPlayers(nrPlayers, game);
+
+            if (!InitialDealCharacterCards(game))
+            {
                 return false;
             }
 
-            bool success = StartGame(nrPlayers, game);
+            if (!PlayersSwitchCharacterCards(game))
+            {
+                return false;
+            }
 
-            success &= MidGame(game);
+            if (!InitialDealSceneCards(game))
+            {
+                return false;
+            }
 
-            return success;
+            if (!DiscardOneSceneCard(game))
+            {
+                return false;
+            }
+
+            if (!MoveSceneCardsToNextPlayer(game))
+            {
+                return false;
+            }
+
+            if (!DiscardOneSceneCard(game))
+            {
+                return false;
+            }
+
+            if (!GatherRemainingSceneCards(game))
+            {
+                return false;
+            }
+
+            if (!CompleteSceneCardsToEight(game))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private static void AddPlayers(int nrPlayers, Game game)
@@ -35,19 +203,6 @@ namespace Rumini.Helpers
                 {
                     PlayerNumber = i,
                 });
-            }
-        }
-
-        private static void CalculateScores(Game game)
-        {
-            foreach (Player player in game.Players)
-            {
-                int multiplier = GetMultiplierBasedOnRound(game.Round);
-                int sceneCardPoints = game.CurrectSceneCard.PointValue;
-
-                int cardValuesOfPlayer = player.PlayedCharacterCards.Sum(c => c.PointValue);
-
-                player.Scores.Add((sceneCardPoints + cardValuesOfPlayer) * multiplier);
             }
         }
 
@@ -123,24 +278,6 @@ namespace Rumini.Helpers
             return true;
         }
 
-        private static bool MidGame(Game game)
-        {
-            int round = 0;
-            bool success = true;
-
-            foreach (SceneCard sceneCard in game.DeckSceneCards)
-            {
-                round++;
-
-                game.Round = round;
-
-                success &= PlayersMoveWithCharacterCards(game);
-                CalculateScores(game);
-            }
-
-            return true;
-        }
-
         private static bool MoveSceneCardsToNextPlayer(Game game)
         {
             List<SceneCard> tempSceneCards = new();
@@ -167,98 +304,6 @@ namespace Rumini.Helpers
             return true;
         }
 
-        private static bool PlayersMoveWithCharacterCards(Game game)
-        {
-            // Put down match
-            foreach (Player player in game.Players)
-            {
-                // ToDo: replace with AI
-
-                // Play matching cards
-                bool cardPlayed = false;
-                List<CharacterCard> userCharacterCardsCopy = player.DeckCharacterCards.Clone().ToList();
-
-                foreach (CharacterCard card in userCharacterCardsCopy)
-                {
-                    if (
-                        SceneCardHelper.SceneCardContainsCharacter(game.CurrectSceneCard, card.CharacterOfCard) &&
-                        !player.PlayedCharacterCards.Contains(card))
-                    {
-                        CharacterCardHelper.MoveCardWithId(card.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
-                        cardPlayed = true;
-                    }
-                }
-
-                // Use the squid when the reqards are worth it
-                if (game.Round > 4)
-                {
-                    bool hasSquidCard = player.HasSquidCard(out CharacterCard? squidCard);
-
-                    if (hasSquidCard && squidCard is not null)
-                    {
-                        // Player has a squid card
-                        // Find the largest card number it can be replaced with
-                        // Largest number card is at the end of the collection
-                        for (int i = game.CurrectSceneCard.Characters.Count - 1; i <= 0; i--)
-                        {
-                            if (player.PlayedCharacterCards.Any(p => p.CharacterOfCard == game.CurrectSceneCard.Characters[i].CharacterOfCard))
-                            {
-                                // Card already played
-                                continue;
-                            }
-
-                            squidCard.PlayedAsCharacter = game.CurrectSceneCard.Characters[i].CharacterOfCard;
-
-                            // Play squid as the found card
-                            CharacterCardHelper.MoveCardWithId(squidCard.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
-                            cardPlayed = true;
-                        }
-                    }
-                }
-
-                // Pass
-                if (!cardPlayed)
-                {
-                    switch (game.Round)
-                    {
-                        case 1:
-                        case 2:
-                            // Pick up two cards
-                            CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, 2);
-                            break;
-
-                        case 3:
-                        case 4:
-                            // Pick up 1 card
-                            CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, 2);
-                            break;
-
-                        case 7:
-                        case 8:
-                            // Get rid of 1 card
-                            if (player.DeckCharacterCards.Count >= 1)
-                            {
-                                CharacterCardHelper.MoveCards(player.DeckCharacterCards, game.DeckDiscardedCaracterCards, 1);
-                            }
-                            else
-                            {
-                                Console.WriteLine($"Player {player.PlayerNumber} did not have any cards to throw away");
-                            }
-
-                            break;
-
-                        default:
-                        case 5:
-                        case 6:
-                            // Do nothing
-                            break;
-                    }
-                }
-            }
-
-            return true;
-        }
-
         private static bool PlayersSwitchCharacterCards(Game game)
         {
             const int NrMaxCharacterCardsToReplace = 3;
@@ -274,57 +319,6 @@ namespace Rumini.Helpers
 
                 // Replenish what was discarded
                 CharacterCardHelper.MoveCards(game.DeckCaracterCards, player.DeckCharacterCards, nrCardsSwitched);
-            }
-
-            return true;
-        }
-
-        private static bool StartGame(int nrPlayers, Game game)
-        {
-            game.DeckCaracterCards = DeckDefinitions.CharacterCards.CloneAndShuffle().ToList();
-            game.DeckSceneCardsOriginal = DeckDefinitions.SceneCards.CloneAndShuffle().ToList();
-            game.Round = 0;
-
-            AddPlayers(nrPlayers, game);
-
-            if (!InitialDealCharacterCards(game))
-            {
-                return false;
-            }
-
-            if (!PlayersSwitchCharacterCards(game))
-            {
-                return false;
-            }
-
-            if (!InitialDealSceneCards(game))
-            {
-                return false;
-            }
-
-            if (!DiscardOneSceneCard(game))
-            {
-                return false;
-            }
-
-            if (!MoveSceneCardsToNextPlayer(game))
-            {
-                return false;
-            }
-
-            if (!DiscardOneSceneCard(game))
-            {
-                return false;
-            }
-
-            if (!GatherRemainingSceneCards(game))
-            {
-                return false;
-            }
-
-            if (!CompleteSceneCardsToEight(game))
-            {
-                return false;
             }
 
             return true;
