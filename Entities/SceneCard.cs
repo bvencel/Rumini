@@ -1,4 +1,6 @@
-﻿namespace Rumini
+﻿using Rumini.Enums;
+
+namespace Rumini.Entities
 {
     internal class SceneCard
     {

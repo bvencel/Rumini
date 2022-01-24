@@ -1,4 +1,4 @@
-﻿namespace Rumini
+﻿namespace Rumini.Enums
 {
     internal enum Character
     {

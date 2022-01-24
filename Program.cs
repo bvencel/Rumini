@@ -1,5 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Rumini;
+﻿using Rumini.Entities;
+using Rumini.Enums;
 
 const int MinPlayers = 2;
 const int MaxPlayers = 6;
