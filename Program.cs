@@ -1,5 +1,6 @@
 ﻿using Rumini.Entities;
 using Rumini.Enums;
+using Rumini.ExtensionMethods;
 
 const int MinPlayers = 2;
 const int MaxPlayers = 6;
@@ -121,6 +122,13 @@ List<CharacterCard> CharacterCards = new()
     new CharacterCard() { PointValue = 10000, CharacterOfCard = Character.Oriaspolip },
 };
 
+List<CharacterCard> ShuffledCharacterCards = CharacterCards.CloneAndShuffle().ToList();
+
 Console.WriteLine(SceneCards.Count);
 
 Console.WriteLine(CharacterCards.Count);
+
+foreach (CharacterCard card in ShuffledCharacterCards)
+{
+    Console.WriteLine(card.ToStringSerialized());
+}
