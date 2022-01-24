@@ -15,7 +15,7 @@ namespace Rumini.Entities
 
         public List<SceneCard> DeckSceneCardsOriginal { get; set; } = new();
 
-        public List<Player> Players => new();
+        public List<Player> Players { get; set; } = new();
 
         public int Round { get; set; } = 0;
     }

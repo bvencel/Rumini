@@ -8,6 +8,6 @@
 
         public List<SceneCard> DeckSceneCards { get; set; } = new();
 
-        public List<int> Scores => new();
+        public List<int> Scores { get; set; } = new();
     }
 }

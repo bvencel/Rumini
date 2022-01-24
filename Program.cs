@@ -9,8 +9,6 @@ static void PrintGame(Game game)
     Console.WriteLine(game.ToStringSerialized());
 }
 
-bool result = GameHelper.PlayGame(NrPlayers, out Game? game);
-if (game is not null)
-{
-    PrintGame((Game)game);
-}
+bool result = GameHelper.PlayGame(NrPlayers, out Game game);
+
+PrintGame(game);

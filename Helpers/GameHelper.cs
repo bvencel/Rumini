@@ -126,9 +126,9 @@ namespace Rumini.Helpers
             new SceneCard() { PointValue = 8, Characters = new List<Character> { Character.Sebestyen } },
         };
 
-        public static bool PlayGame(int nrPlayers, out Game? game)
+        public static bool PlayGame(int nrPlayers, out Game game)
         {
-            game = null;
+            game = new Game();
 
             if (nrPlayers < MinNrPlayers || nrPlayers > MaxNrPlayers)
             {
@@ -136,23 +136,17 @@ namespace Rumini.Helpers
                 return false;
             }
 
-            game = StartGame(nrPlayers);
+            bool success = StartGame(nrPlayers, game);
 
-            if (game == null)
-            {
-                Console.WriteLine("Game could not be started");
-                return false;
-            }
-
-            return true;
+            return success;
         }
 
-        private static void AddPlayers(int nrPlayers, ref Game game)
+        private static void AddPlayers(int nrPlayers, Game game)
         {
             // Add players
             for (int i = 0; i < nrPlayers; i++)
             {
-                game.Players.Add(new Player
+                game.Players.Add(new Player()
                 {
                     PlayerNumber = i,
                 });
@@ -187,7 +181,7 @@ namespace Rumini.Helpers
         {
             foreach (Player player in game.Players)
             {
-                SceneCardHelper.MoveCards(player.DeckSceneCards, game.DeckSceneCards, 1);
+                SceneCardHelper.MoveAllCards(player.DeckSceneCards, game.DeckSceneCards);
             }
 
             game.DeckSceneCards.Shuffle();
@@ -241,7 +235,7 @@ namespace Rumini.Helpers
             // Give original deck of player 0 to the last one
             SceneCardHelper.MoveAllCards(
                 tempSceneCards,
-                game.Players[game.Players.Count - 1].DeckSceneCards);
+                game.Players[^1].DeckSceneCards);
 
             return true;
         }
@@ -266,58 +260,55 @@ namespace Rumini.Helpers
             return true;
         }
 
-        private static Game? StartGame(int nrPlayers)
+        private static bool StartGame(int nrPlayers, Game game)
         {
-            Game game = new()
-            {
-                DeckCaracterCards = CharacterCards.CloneAndShuffle().ToList(),
-                DeckSceneCardsOriginal = SceneCards.CloneAndShuffle().ToList(),
-                Round = 0,
-            };
+            game.DeckCaracterCards = CharacterCards.CloneAndShuffle().ToList();
+            game.DeckSceneCardsOriginal = SceneCards.CloneAndShuffle().ToList();
+            game.Round = 0;
 
-            AddPlayers(nrPlayers, ref game);
+            AddPlayers(nrPlayers, game);
 
             if (!InitialDealCharacterCards(game))
             {
-                return null;
+                return false;
             }
 
             if (!PlayersSwitchCharacterCards(game))
             {
-                return null;
+                return false;
             }
 
             if (!InitialDealSceneCards(game))
             {
-                return null;
+                return false;
             }
 
             if (!DiscardOneSceneCard(game))
             {
-                return null;
+                return false;
             }
 
             if (!MoveSceneCardsToNextPlayer(game))
             {
-                return null;
+                return false;
             }
 
             if (!DiscardOneSceneCard(game))
             {
-                return null;
+                return false;
             }
 
             if (!GatherRemainingSceneCards(game))
             {
-                return null;
+                return false;
             }
 
             if (!CompleteSceneCardsToEight(game))
             {
-                return null;
+                return false;
             }
 
-            return game;
+            return true;
         }
     }
 }
