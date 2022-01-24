@@ -46,7 +46,7 @@ namespace Rumini.Helpers
             }
         }
 
-        public static bool PlayersMoveWithCharacterCards(Game game)
+        public static bool PlayersHandleCharacterCards(Game game)
         {
             // Put down match
             foreach (Player player in game.Players)
@@ -54,18 +54,31 @@ namespace Rumini.Helpers
                 // ToDo: replace with AI
 
                 // Play matching cards
-                bool cardPlayed = false;
+                //bool cardPlayed = false;
                 List<CharacterCard> userCharacterCardsCopy = player.DeckCharacterCards.Clone().ToList();
+                int nrCardsPlayed = 0;
 
                 foreach (CharacterCard card in userCharacterCardsCopy)
                 {
+                    // Hold on with investing until later
+                    if (player.Strategy.DelayInvestingCards >= game.Round)
+                    {
+                        continue;
+                    }
+
                     if (
                         game.CurrectSceneCard is not null &&
                         SceneCardHelper.SceneCardContainsCharacter(game.CurrectSceneCard, card.CharacterOfCard) &&
                         !PlayerAlreadyPlayedCharacter(player.PlayedCharacterCards, card.CharacterOfCard))
                     {
                         CharacterCardHelper.MoveCardWithId(card.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
-                        cardPlayed = true;
+                        nrCardsPlayed++;
+                    }
+
+                    // If enough cards were laid out, stop
+                    if (nrCardsPlayed >= player.Strategy.InvestingCardsLimit)
+                    {
+                        break;
                     }
                 }
 
@@ -91,7 +104,7 @@ namespace Rumini.Helpers
 
                             // Play squid as the found card
                             CharacterCardHelper.MoveCardWithId(squidCard.Id, player.DeckCharacterCards, player.PlayedCharacterCards);
-                            cardPlayed = true;
+                            nrCardsPlayed++;
 
                             continue;
                         }
@@ -99,7 +112,7 @@ namespace Rumini.Helpers
                 }
 
                 // Pass
-                if (!cardPlayed)
+                if (nrCardsPlayed == 0)
                 {
                     switch (game.Round)
                     {
@@ -170,25 +183,28 @@ namespace Rumini.Helpers
         {
             game = new Game();
 
-            _ = StartGame(nrPlayers, game);
+            _ = StartGame(
+                nrPlayers,
+                game,
+                new());
 
             for (int i = 0; i < 8; i++)
             {
                 game.Round = i + 1;
 
-                _ = PlayersMoveWithCharacterCards(game);
+                _ = PlayersHandleCharacterCards(game);
                 CalculateScores(game);
                 _ = PlayersThrowAwayPlayedCards(game);
             }
         }
 
-        public static bool StartGame(int nrPlayers, Game game)
+        public static bool StartGame(int nrPlayers, Game game, PlayerStrategy strategy)
         {
             game.DeckCaracterCards = DeckDefinitions.CharacterCards.CloneAndShuffle().ToList();
             game.DeckSceneCardsOriginal = DeckDefinitions.SceneCards.CloneAndShuffle().ToList();
             game.Round = 0;
 
-            AddPlayers(nrPlayers, game);
+            AddPlayers(nrPlayers, game, strategy);
 
             if (!InitialDealCharacterCards(game))
             {
@@ -233,7 +249,7 @@ namespace Rumini.Helpers
             return true;
         }
 
-        private static void AddPlayers(int nrPlayers, Game game)
+        private static void AddPlayers(int nrPlayers, Game game, PlayerStrategy strategy)
         {
             // Add players
             for (int i = 0; i < nrPlayers; i++)
@@ -241,6 +257,7 @@ namespace Rumini.Helpers
                 game.Players.Add(new Player()
                 {
                     PlayerNumber = i,
+                    Strategy = strategy,
                 });
             }
         }

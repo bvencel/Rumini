@@ -10,7 +10,14 @@ namespace Rumini.Entities
 
         public List<SceneCard> DeckSceneCards { get; set; } = new();
 
+        /// <summary>
+        /// The collection of cards that is put down for the <see cref="Game.CurrectSceneCard"/>.
+        /// </summary>
+        public List<CharacterCard> PlayedCharacterCards { get; set; } = new();
+
         public List<int> Scores { get; set; } = new();
+
+        public PlayerStrategy Strategy { get; set; } = new();
 
         /// <summary>
         /// Determines if the player has a squid card and gives reference to it.
@@ -30,10 +37,5 @@ namespace Rumini.Entities
             squidCard = card;
             return true;
         }
-
-        /// <summary>
-        /// The collection of cards that is put down for the <see cref="Game.CurrectSceneCard"/>.
-        /// </summary>
-        public List<CharacterCard> PlayedCharacterCards { get; set; } = new();
     }
 }

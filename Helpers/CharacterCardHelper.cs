@@ -37,7 +37,7 @@ namespace Rumini.Helpers
 
             if (sourceDeck.Count < nrCardsToMove)
             {
-                Console.WriteLine($"Source deck only contains {sourceDeck.Count} cards, not enough for moving {nrCardsToMove} character cards");
+                ////Console.WriteLine($"Source deck only contains {sourceDeck.Count} cards, not enough for moving {nrCardsToMove} character cards");
                 return false;
             }
 
